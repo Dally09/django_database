@@ -11,4 +11,8 @@ admin.site.index_title="Gen Shop"
 
 @admin.register(Product)
 class ProductAdmin(ModelAdmin):
+    list_display = ('name', 'cost', 'price', 'category', 'for_sale', 'discount')
+    search_fields = ('name', 'code','category')
+    list_filter = ('name', 'code', 'category')
+    ordering = ('name','price')
     pass
