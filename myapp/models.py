@@ -9,6 +9,12 @@ def gen_unique_path(instance, filename):
 
 from myapp import migrations
 
+CATEGORIES = [
+    ('Food', 'Food Category'),
+    ('Drinks', 'Drinks Category'),
+    ('Cleaning', 'Cleaning Category'),
+    ('Hardware', 'Hardware Category'),
+]
 
 # Create your models here.
 class Product(models.Model):
@@ -18,7 +24,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.IntegerField(default=0)
     for_sale = models.BooleanField(default=False)
-    category = models.CharField(max_length=50)
+    category = models.CharField(max_length=50, choices=CATEGORIES)
     pic = models.ImageField(upload_to=gen_unique_path) # removed , default='products/default.jpg'
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
