@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from myapp.forms import ProductForm
@@ -16,6 +17,8 @@ def add(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, f'{form.cleaned_data["name"]} successfully added')
+            # messages.error(request, f'{form.cleaned_data["name"]} failed to add')
             return redirect('home')
     else:
         form = ProductForm()
@@ -42,6 +45,7 @@ def add(request):
 def delete_product(request, id):
     product = Product.objects.get(id=id) #select * from products where id=65
     product.delete() # delete * from products where id=65
+    messages.warning(request, f'{product.name} successfully deleted')
     return redirect('home')
 
 
@@ -51,6 +55,8 @@ def edit_product(request, id):
         form = ProductForm(request.POST, request.Files, instance=product) # req files throws an error
         if form.is_valid():
             form.save()
+            messages.success(request, f'{product.name} successfully updated')
+            # messages.error(request, f'{product.name} failed to update')
             return redirect('home')
     else:
         form = ProductForm(instance=product)
