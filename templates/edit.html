@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container border rounded p-5">
     <h2>Edit Product</h2>
     <form action="{% url 'edit' form.instance.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
